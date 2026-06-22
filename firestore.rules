@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if the user is an administrator
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Rules for user profiles
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == userId
+                    && !request.resource.data.keys().hasAny(['isAdmin', 'role', 'permissions', 'accessLevel']);
+      allow update: if request.auth != null && (
+                      isAdmin() ||
+                      (request.auth.uid == userId && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['isAdmin', 'role', 'permissions', 'accessLevel']))
+                    );
+      allow delete: if isAdmin();
+    }
+    
+    // Rules for username reservations (uniqueness check)
+    match /usernames/{username} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow delete: if request.auth != null && (resource.data.uid == request.auth.uid || isAdmin());
+      allow update: if false;
+    }
+
+    // Rules for global settings
+    match /settings/{settingId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Rules for typing tests
+    match /tests/{testId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Rules for certificates
+    match /certificates/{certId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Rules for announcements
+    match /announcements/{annId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Rules for blocked IPs
+    match /blocked_ips/{ip} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Rules for blocked devices
+    match /blocked_devices/{device} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Rules for audit logs
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if request.auth != null; // Admins or actions taken can log
+      allow update, delete: if false; // Audit logs are immutable
+    }
+
+    // Rules for OTP verifications (Admins can read/write, users can read/write their own verification)
+    match /otp_verifications/{email} {
+      allow read, write: if (request.auth != null && request.auth.token.admin == true) ||
+                            (request.auth != null && request.auth.token.email == email);
+    }
+    match /otp_logs/{logId} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow write: if false;
+    }
+    match /sent_emails/{emailId} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow write: if false;
+    }
+
+    // Rules for multiplayer lobbies
+    match /lobbies/{lobbyId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

@@ -1,0 +1,543 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --shadow-glass: var(--glass-shadow);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Default to a premium dark theme for the Master Typing Pro experience */
+  --background: oklch(0.12 0.01 250);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.15 0.02 250 / 0.4);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.15 0.02 250 / 0.6);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.65 0.15 250);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.2 0.05 250 / 0.5);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.2 0.05 250 / 0.5);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.25 0.08 250 / 0.5);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.05);
+  --ring: oklch(0.65 0.15 250);
+  --radius: 1rem;
+  
+  /* Glassmorphism 2.0 Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.12 0.01 250 / 0.5);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.65 0.15 250);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.25 0.08 250 / 0.5);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.65 0.15 250);
+}
+
+.dark, [data-theme="dark"] {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
+[data-theme="light"] {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.4 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 15%);
+  --ring: oklch(0.488 0.243 264.376);
+  
+  --glass-bg: rgba(0, 0, 0, 0.045);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Hide Next.js DevTools UI completely */
+nextjs-portal {
+  display: none !important;
+}
+
+[data-theme="grey"] {
+  --background: oklch(0.2 0 0);
+  --foreground: oklch(0.985 0 0);
+  --primary: oklch(0.6 0 0);
+  --primary-foreground: oklch(0.145 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --muted: oklch(0.3 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+}
+
+[data-theme="purple"] {
+  --background: oklch(0.15 0.05 300);
+  --foreground: oklch(0.95 0.02 300);
+  --primary: oklch(0.65 0.25 300);
+  --primary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.65 0.25 300 / 20%);
+  --muted: oklch(0.2 0.05 300);
+  --muted-foreground: oklch(0.7 0.05 300);
+}
+
+[data-theme="pink"] {
+  --background: oklch(0.15 0.05 340);
+  --foreground: oklch(0.95 0.02 340);
+  --primary: oklch(0.65 0.25 340);
+  --primary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.65 0.25 340 / 20%);
+  --muted: oklch(0.2 0.05 340);
+  --muted-foreground: oklch(0.7 0.05 340);
+}
+
+[data-theme="sky-blue"] {
+  --background: oklch(0.15 0.05 240);
+  --foreground: oklch(0.95 0.02 240);
+  --primary: oklch(0.65 0.15 240);
+  --primary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.65 0.15 240 / 20%);
+  --muted: oklch(0.2 0.05 240);
+  --muted-foreground: oklch(0.7 0.05 240);
+}
+
+[data-theme="sky-grey"] {
+  --background: oklch(0.18 0.02 240);
+  --foreground: oklch(0.95 0.01 240);
+  --primary: oklch(0.55 0.05 240);
+  --primary-foreground: oklch(0.1 0.02 240);
+  --border: oklch(1 0 0 / 10%);
+  --muted: oklch(0.25 0.02 240);
+  --muted-foreground: oklch(0.7 0.02 240);
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    /* Add a subtle radial gradient for that dynamic premium look */
+    background-image: radial-gradient(circle at 50% 0%, oklch(0.2 0.05 250 / 0.5) 0%, transparent 70%);
+    height: 100%;
+  }
+  html {
+    @apply font-sans;
+    height: 100%;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-glass-bg border border-glass-border shadow-glass;
+  }
+  
+  .glass-panel-interactive {
+    @apply bg-glass-bg border border-glass-border shadow-glass transition-all duration-300 hover:bg-white/5 hover:border-white/10 hover:shadow-2xl;
+  }
+  
+  .electron-drag {
+    -webkit-app-region: drag;
+  }
+  
+  .electron-no-drag {
+    -webkit-app-region: no-drag;
+  }
+}
+
+/* --- MASTER TYPING PRO OPTIMIZED ANIMATIONS --- */
+
+:root {
+  --key-active: rgba(255, 255, 255, 0.25);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --text-upcoming: rgba(255, 255, 255, 0.8);
+  --cursor-cyan: #00d4ff;
+  --cursor-green: #00c896;
+  --cursor-red: #ff4d4d;
+  --color-success: #00c896;
+}
+
+/* Will-change optimization for high-frequency elements */
+.high-perf-cursor,
+.high-perf-progress,
+.high-perf-key {
+  will-change: transform, opacity;
+}
+
+.typing-container {
+  contain: layout style paint;
+}
+
+/* --- Cursor Blink and Pulse --- */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blinking {
+  animation: cursorBlink 530ms ease-in-out infinite;
+}
+
+.cursor-paused {
+  animation-play-state: paused;
+}
+
+@keyframes cursorIdlePulse {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(4); } /* width 2px to 8px */
+}
+
+.cursor-idle-pulse {
+  animation: cursorIdlePulse 1s ease-in-out infinite;
+}
+
+/* --- Character Load Stagger --- */
+@keyframes charEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.char-load-enter {
+  animation: charEnter 120ms ease forwards;
+  animation-delay: calc(var(--char-index) * 12ms);
+  opacity: 0;
+}
+
+/* --- Space Accepted Line --- */
+@keyframes spaceUnderline {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+.space-accepted::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background-color: var(--color-success);
+  transform-origin: center;
+  animation: spaceUnderline 350ms forwards;
+}
+
+/* --- Auto-correct crossfade --- */
+@keyframes autocorrectWrong {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) translateY(-4px);
+    opacity: 0;
+  }
+}
+
+@keyframes autocorrectCorrect {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.autocorrect-wrong {
+  animation: autocorrectWrong 200ms ease forwards;
+}
+
+.autocorrect-correct {
+  animation: autocorrectCorrect 200ms ease forwards;
+}
+
+/* --- Word Complete Flash --- */
+@keyframes wordFlash {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(0, 255, 100, 0.07); }
+}
+
+.animate-word-flash {
+  animation: wordFlash 400ms ease forwards;
+}
+
+/* --- Perfect Word Pulse --- */
+@keyframes perfectPulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: inset 0 0 12px rgba(0, 200, 150, 0.4); }
+}
+
+.animate-perfect-pulse {
+  animation: perfectPulse 500ms ease;
+}
+
+/* --- Backspace Deleted Amber Flash --- */
+@keyframes amberFlash {
+  0% { background-color: rgba(245, 158, 11, 0.35); }
+  100% { background-color: transparent; }
+}
+
+.animate-amber-flash {
+  animation: amberFlash 200ms ease forwards;
+}
+
+/* --- Keyboard Cap Ripple --- */
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  animation: rippleEffect 400ms ease-out forwards;
+}
+
+/* --- Keyboard Error Key Flash --- */
+@keyframes errorKeyFlash {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: inset 0 0 0 2px #ff4d4d, 0 0 8px rgba(255, 77, 77, 0.4); }
+}
+
+.animate-error-key-flash {
+  animation: errorKeyFlash 500ms ease;
+}
+
+/* --- Progress Bar Pulse --- */
+@keyframes barPulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.3) scaleX(1.02); filter: drop-shadow(0 0 8px var(--color-success)); }
+}
+
+.animate-bar-pulse {
+  animation: barPulse 600ms ease;
+}
+
+/* --- Error Shake Container --- */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes shake-gentle {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-shake {
+  animation: shake 200ms linear;
+}
+
+.animate-shake-gentle {
+  animation: shake-gentle 200ms linear;
+}
+
+/* --- Screen Edge Red Flash Overlay --- */
+@keyframes edgeFlash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.10; }
+}
+
+.animate-edge-flash {
+  animation: edgeFlash 280ms ease;
+}
+
+/* --- XP Gained Popup --- */
+@keyframes xpPopupAnim {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+.animate-xp-popup {
+  animation: xpPopupAnim 800ms ease-out forwards;
+}
+
+/* --- Level Up Radial Particles --- */
+@keyframes particleAnim {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleAnim 600ms ease-out forwards;
+}
+
+/* --- Stats cards entry staggers --- */
+.results-card-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.results-card-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1), transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Pause blur overlay --- */
+.pause-overlay-enter {
+  backdrop-filter: blur(0px);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.pause-overlay-enter-active {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.85);
+  transition: backdrop-filter 200ms ease, background-color 200ms ease;
+}
+
+/* --- ACCESSIBILITY - PREFERS REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cursor, .high-perf-cursor { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+  .ripple, .xp-popup, .particle, .shake, .animate-shake, .animate-shake-gentle, .animate-edge-flash, .animate-xp-popup, .particle { display: none !important; }
+  .progress-bar, .high-perf-progress { transition: none !important; }
+  .ghost-cursor { display: none !important; }
+}
